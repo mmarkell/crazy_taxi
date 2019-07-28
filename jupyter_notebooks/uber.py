@@ -19,17 +19,6 @@ class taxidb():
         result = self.executeQuery(query)
         return next(result)
 
-    def get_driver_utilization(self):
-        query = """
-            SELECT SUM(t1.trip_time_in_secs) / SUM(t2.) as utilization, t1.Medallion
-            FROM TRIPS as t1
-            JOIN TRIPS as t2 ON t1.Medallion = t2.Medallion
-            GROUP BY Medallion
-            LIMIT 10
-        """
-        result = self.executeQuery(query)
-        return next(result)
-
     def get_shareable_ride_count_by_distance_and_time(self, distance, time, hour=None):
         query = """
             select count(*) from trips as t1

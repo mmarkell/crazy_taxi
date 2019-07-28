@@ -27,21 +27,19 @@ create table trips
 
 COPY trips FROM '/home/trip_data/test.csv' DELIMITER ',' CSV HEADER;
 
-ALTER TABLE trips ADD COLUMN pickup_geo geometry
-(Geometry, 4326);
-ALTER TABLE trips ADD COLUMN dropoff_geo geometry
-(Geometry, 4326);
+alter table trips add column id serial primary key;
+ALTER TABLE trips ADD COLUMN pickup_geo geography;
+ALTER TABLE trips ADD COLUMN dropoff_geo geography;
 
 UPDATE trips SET pickup_geo = ST_SetSRID(ST_MakePoint(pickup_longitude, pickup_latitude), 4326);
 UPDATE trips SET dropoff_geo = ST_SetSRID(ST_MakePoint(dropoff_longitude, dropoff_latitude), 4326);
 
-create index pickup_index on trips using GIST
+create index pickup_idx on trips using GIST
 (pickup_geo);
-create index dropoff_index on trips using GIST
+create index dropoff_idx on trips using GIST
 (dropoff_geo);
 create index trip_time_idx on trips (trip_time_in_secs);
 create index trip_distance_idx on trips(trip_distance);
 create index trip_datetime_idx on trips(pickup_datetime);
 
-alter table trips add column id serial primary key;
 VACUUM ANALYZE trips;

@@ -14,7 +14,7 @@ services:
       - postgres
 
   datascience-notebook:
-      build: ./jupyter/
+      build: ./jupyter_docker/
       volumes:
         - ./jupyter_notebooks:/home/jovyan/work
         - ./jupyter_notebooks/uber.py:/home/jovyan/work/uber.py
