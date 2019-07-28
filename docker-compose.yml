@@ -1,0 +1,32 @@
+# docker-compose.yml
+version: "3"
+services:
+  postgis:
+    image: mdillon/postgis
+    volumes:
+        - ./data:/home/
+        - ./init-data.sql:/docker-entrypoint-initdb.d/init.sql
+        - postgres_data:/var/lib/postgresql/data
+    environment:
+          - POSTGRES_PASSWORD=password
+    command: -c 'fsync=off'
+    networks:
+      - postgres
+
+  datascience-notebook:
+      build: ./jupyter/
+      volumes:
+        - ./jupyter_notebooks:/home/jovyan/work
+        - ./jupyter_notebooks/uber.py:/home/jovyan/work/uber.py
+      ports:
+        - 8888:8888
+      container_name: datascience-notebook-container
+      networks:
+        - postgres
+
+volumes:
+  postgres_data:
+
+networks:
+  postgres:
+  
