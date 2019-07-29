@@ -11,7 +11,7 @@ Analyzing 80 + GB of spatial data is no easy task, especially when you do it loc
 
 
 # Seeing insights:
-    In addition to answers below, I have also included a jupyter notebook with a sql client where you can run any queries or see visualizations as you wish. Follow the 'running the code' section above to use the jupyter notebook.
+In addition to answers below, I have also included a jupyter notebook with a sql client where you can run any queries or see visualizations as you wish. Follow the 'running the code' section above to use the jupyter notebook.
 
 ## 1. Metrics (Find some queries and visualization in the jupyter notebook)
 1. The average trip length is about 11 minutes.
